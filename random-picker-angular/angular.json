@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "scripts": ["src/assets/random-picker/random-picker-wc-CyNBWPGn.js"],
+            "scripts": ["src/assets/random-picker/random-picker.js"],
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",

@@ -1,5 +1,66 @@
-<main class="main">
-  <random-picker id="rp" title="Lucky Draw" items='["A","B","C","D"]'></random-picker>
-</main>
+<div class="blob blob-1" [style.background]="selected().glow"></div>
+<div class="blob blob-2" [style.background]="selected().glow"></div>
+
+<div class="shell">
+  <div class="wrapper">
+    <header class="hero">
+      <div class="hero-badge">🎰 Lucky Draw Machine</div>
+      <h1 class="hero-title">Pick Your Category</h1>
+      <p class="hero-sub">Select a theme — the picker updates instantly with matching items.</p>
+    </header>
+
+    <div class="categories-wrapper">
+      <section class="categories">
+        @for (cat of categories; track cat.id; let i = $index) {
+          <button
+            class="cat-card"
+            [class.cat-card--active]="isActive(cat)"
+            [style.--glow]="cat.glow"
+            [style.animation-delay]="i * 80 + 'ms'"
+            (click)="select(cat)"
+            [attr.aria-pressed]="isActive(cat)"
+          >
+            <span class="cat-card__gradient" [style.background]="cat.gradient"></span>
+            <span class="cat-card__emoji">{{ cat.emoji }}</span>
+            <span class="cat-card__label">{{ cat.label }}</span>
+            <span class="cat-card__tag">{{ cat.tag }}</span>
+            <span class="cat-card__check">✓</span>
+          </button>
+        }
+      </section>
+
+      <div class="active-banner" [style.--glow]="selected().glow">
+        <div class="active-banner__left">
+          <span class="active-banner__emoji">{{ selected().emoji }}</span>
+          <div>
+            <p class="active-banner__name">{{ selected().label }}</p>
+            <p class="active-banner__count">{{ selected().items.length }} items in pool</p>
+          </div>
+        </div>
+        <div class="active-banner__pills">
+          @for (item of selected().items; track item; let i = $index) {
+            <span class="item-pill" [style.animation-delay]="i * 40 + 'ms'">{{ item }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="picker-stage" [style.--glow]="selected().glow">
+    <div class="picker-stage__header">
+      <span class="picker-stage__dot"></span>
+      <span class="picker-stage__dot"></span>
+      <span class="picker-stage__dot"></span>
+      <span class="picker-stage__label">random-picker React component</span>
+    </div>
+    <div class="picker-stage__body">
+      <random-picker
+        id="rp"
+        [attr.title]="pickerTitle()"
+        [attr.items]="itemsJson()"
+      ></random-picker>
+    </div>
+  </section>
+</div>
 
 <router-outlet />

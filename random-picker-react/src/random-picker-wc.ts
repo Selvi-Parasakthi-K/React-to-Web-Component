@@ -13,7 +13,7 @@ const RandomPickerWC = r2wc(RandomPicker, {
 // define the custom element
 customElements.define(
   "random-picker",
-  RandomPickerWC as unknown as CustomElementConstructor
+  RandomPickerWC as unknown as CustomElementConstructor,
 );
 
 // NOTE: r2wc provides a `connectedCallback` that passes element props; you can also attach events there.
